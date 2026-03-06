@@ -11,8 +11,45 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="./styles/main.css">
 </head>
-<body>
-    <h1>hello world</h1>
-    <script src="./scripts/main.js"></script>
+<body class="bg-[#cccccc]">
+    <main id="main">
+        <section class="flex justify-center items-center h-[100vh]">
+            <div class="bg-white w-100 flex justify-center p-8">
+                <div class="text-center w-full">
+                    <section class="w-full">
+                        <img src="./assets/images/github-logo.png" alt="" class="mx-auto w-20 mb-5">
+                        <h2 class="font-bold text-xl">GitHub Issues Tracker</h2>
+                        <p class="text-sm">Sign in to manage your issues</p>
+                    </section>
+                    <section class="w-full my-5">
+    <div class="card">
+      <div class="card-body p-0">
+        <form id="form" class="fieldset">
+          <label class="label font-bold text-black">Username</label>
+          <input type="text" name="name" class="input w-full" placeholder="Enter Username" required/>
+           <p class="text-left text-[#4A00FF]">Default: admin</p>
+          <label class="label font-bold text-black">Password</label>
+          <input type="text" name="password" class="input w-full" placeholder="Enter Password" required/>
+          <p class="text-left text-[#4A00FF]">Default: admin123</p>
+          <button type="submit" class="btn btn-primary mt-4">Sign In</button>
+        </form>
+  </div>
+</div>
+                    </section>
+                    <section>
+                        <p class="uppercase">or</p>
+                    </section>
+                    <section class="space-y-4 mt-5">
+                        <p class="text-[14px]">Demo Credentials:</p>
+                        <div>
+                            <p class="text-md"><span class="font-bold">Username</span>: admin</p>
+                            <p class="text-md"><span class="font-bold">Password</span>: admin123</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="./scripts/login.js"></script>
 </body>
 </html>
