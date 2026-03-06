@@ -11,18 +11,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="./styles/main.css">
 </head>
-<body>
-    <header>
+<body class="bg-gray-100">
+    <header id="header">
         <nav>
-            <div class="navbar bg-base-100 shadow-sm">
+            <div class="navbar bg-base-100 shadow-sm flex-col md:flex-row">
   <div class="flex-1">
     <div class="flex items-center gap-2">
         <img src="./assets/images/github-logo.png" alt="" class="w-7 h-7">
         <p class="font-bold text-2xl">GitHub Issues Tracker</p>
     </div>
   </div>
-  <div class="flex gap-2">
-    <input type="text" placeholder="Search issues..." class="input input-bordered w-24 md:w-auto" />
+  <div class="gap-2 flex">
+    <input type="text" placeholder="Search issues..." class="input input-bordered w-50" />
     <div class="dropdown dropdown-end">
       <button class="btn capitalize btn-primary">+ new issue</button>
     </div>
@@ -30,13 +30,56 @@
 </div>
         </nav>
     </header>
-    <main>
 
+    <main id="main" class="w-10/12 mx-auto my-5 h-[100vh]">
+      <section id="tab-section" class="bg-white p-5">
+        <div id="tab-container" class="flex gap-3">
+          <button class="capitalize btn btn-primary">all</button>
+          <button class="capitalize btn">open</button>
+          <button class="capitalize btn">closed</button>
+        </div>
+      </section>
+
+      <section id="card-section" class="bg-white my-5 p-5">
+
+        <div id="card-title" class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <img src="./assets/icons/Aperture.png" alt="" class="w-7 h-7">
+            <div>
+              <h3 class="font-bold text-lg"><span id="card-title-num">50</span> Issues</h3>
+              <p class="text-sm">Track and manage your project issues</p>
+            </div>
+          </div>
+
+          <div class="gap-5 md:flex">
+            <p class="capitalize text-sm items-center"><i class="fa-solid fa-circle text-[8px] mr-1 text-[#00A96E]"></i>open</p>
+            <p class="capitalize text-sm flex items-center"><i class="fa-solid fa-circle text-[8px] mr-1 text-[#A855F7]"></i>closed</p>
+          </div>
+        </div>
+
+        <div id="card-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+          <div class="card-all space-y-2 bg-gray-100 p-5">
+            <div class="flex justify-between items-center">
+              <i class="fa-solid fa-circle"></i>
+              <p class="capitalize py-1 px-7 bg-red-100 rounded-full">high</p>
+            </div>
+            <h2 class="font-bold text-xl">Fix navigation menu on mobile devices</h2>
+            <p>The navigation menu doesn't collapse properly on mobile devices...</p>
+            <div class="flex justify-between">
+              <p class="capitalize py-1 px-7 bg-red-100 rounded-full">bug</p>
+              <p class="capitalize py-1 px-7 bg-red-100 rounded-full">help wanted</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
     </main>
-    <footer>
+
+    <footer id="footer">
 
     </footer>
+
     <script src="./scripts/main.js"></script>
     <script src="./scripts/login.js"></script>
-</body>
+  </body>
 </html>
