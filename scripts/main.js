@@ -40,7 +40,7 @@ const loadAllIssues = (data) => {
             <p class="text-sm">${item.description}</p>
             <div class="flex justify-between">
               ${item.labels.map(label => `
-                <p class="capitalize py-1 px-7 bg-red-100 rounded-full text-[12px]">${label}</p>
+                <p class="capitalize py-1 px-5 bg-red-100 rounded-full text-[12px]">${label}</p>
                 `).join('')}
             </div>
             <hr class='border-gray-200'>
@@ -75,7 +75,7 @@ const loadOpenIssues = (data) => {
             <p class="text-sm">${item.description}</p>
             <div class="flex justify-between">
               ${item.labels.map(label => `
-                <p class="capitalize py-1 px-7 bg-red-100 rounded-full text-[12px]">${label}</p>
+                <p class="capitalize py-1 px-5 bg-red-100 rounded-full text-[12px]">${label}</p>
                 `).join('')}
             </div>
             <hr class='border-gray-200'>
@@ -104,7 +104,7 @@ const loadClosedIssues = (data) => {
         div.innerHTML = `
             <div class="flex justify-between items-center">
               ${item.priority === 'low' ? '<i class="fa-solid fa-circle text-purple-500"></i>' : '<i class="fa-regular fa-circle text-green-500"></i>'}
-              <p class="capitalize py-1 px-7 bg-red-100 rounded-full text-[12px]">${item.priority}</p>
+              <p class="capitalize py-1 px-5 bg-red-100 rounded-full text-[12px]">${item.priority}</p>
             </div>
             <h2 class="font-bold text-lg">${item.title}</h2>
             <p class="text-sm">${item.description}</p>
@@ -192,7 +192,7 @@ const showModal = async(id) => {
     </div>
     <div class="flex gap-5">
     ${resData.labels.map(label => 
-    `<p class="capitalize py-1 px-7 bg-[#FDE68A] rounded-full text-[12px]">${label}</p>`
+    `<p class="capitalize py-1 px-5 bg-[#FDE68A] rounded-full text-[12px]">${label}</p>`
     ).join('')}
     </div>
     <p>${resData.description}</p>
