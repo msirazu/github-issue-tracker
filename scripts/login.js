@@ -9,13 +9,13 @@ form.addEventListener('submit', (e) => {
 
     if (userName !== 'admin') {
         errorMsg.innerText = '';
-        errorMsg.innerText = 'username incorect';
+        errorMsg.innerText = 'username incorrect';
         return;
     }
 
     if (password !== 'admin123') {
         errorMsg.innerText = '';
-        errorMsg.innerText = 'password incorect';
+        errorMsg.innerText = 'password incorrect';
         return;
     }
 
