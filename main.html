@@ -1,82 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main | Github Issue Tracker</title>
-    <link rel="shortcut icon" href="./assets/images/github-logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./styles/main.css">
-</head>
-<body class="bg-gray-100">
+    <link
+      rel="shortcut icon"
+      href="./assets/images/github-logo.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body class="bg-gray-100">
     <header id="header">
-        <nav>
-            <div class="navbar bg-base-100 shadow-sm flex-col md:flex-row">
-  <div class="flex-1">
-    <div class="flex items-center gap-2">
-        <img src="./assets/images/github-logo.png" alt="" class="w-7 h-7">
-        <p class="font-bold text-2xl">GitHub Issues Tracker</p>
-    </div>
-  </div>
-  <div class="gap-2 flex">
-    <input type="text" placeholder="Search issues..." class="input input-bordered w-50" />
-    <div class="dropdown dropdown-end">
-      <button class="btn capitalize btn-primary">+ new issue</button>
-    </div>
-  </div>
-</div>
-        </nav>
+      <nav>
+        <div class="navbar bg-base-100 shadow-sm flex-col md:flex-row space-y-5 md:space-y-0">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <img
+                src="./assets/images/github-logo.png"
+                alt=""
+                class="w-7 h-7"
+              />
+              <p class="font-bold text-2xl">GitHub Issues Tracker</p>
+            </div>
+          </div>
+          <div class="gap-2 flex">
+            <input
+              type="text"
+              placeholder="Search issues..."
+              class="input input-bordered w-50"
+            />
+            <div class="dropdown dropdown-end">
+              <button class="btn capitalize btn-primary">+ new issue</button>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
 
-    <main id="main" class="w-10/12 mx-auto my-5">
+    <main id="main" class="w-11/12 mx-auto my-5 md:w-10/12">
       <section id="tab-section" class="bg-white p-5">
         <div id="tab-container" class="flex gap-3">
-          <button onclick="tabSelect('all')" id="all-tab" class="capitalize btn btn-primary">all</button>
-          <button onclick="tabSelect('open')" id="open-tab" class="capitalize btn">open</button>
-          <button onclick="tabSelect('closed')" id="closed-tab" class="capitalize btn">closed</button>
+          <button
+            onclick="tabSelect('all')"
+            id="all-tab"
+            class="capitalize btn btn-primary"
+          >
+            all
+          </button>
+          <button
+            onclick="tabSelect('open')"
+            id="open-tab"
+            class="capitalize btn"
+          >
+            open
+          </button>
+          <button
+            onclick="tabSelect('closed')"
+            id="closed-tab"
+            class="capitalize btn"
+          >
+            closed
+          </button>
         </div>
       </section>
 
       <section id="card-section" class="bg-white my-5 p-5">
-
         <div id="card-title" class="flex justify-between items-center">
           <div class="flex items-center gap-2">
-            <img src="./assets/icons/Aperture.png" alt="" class="w-7 h-7">
+            <img src="./assets/icons/Aperture.png" alt="" class="w-7 h-7" />
             <div>
-              <h3 class="font-bold text-lg"><span id="card-all-num">50</span> Issues</h3>
+              <h3 class="font-bold text-lg">
+                <span id="card-all-num">50</span
+                ><span id="card-open-num" class="hidden">40</span
+                ><span id="card-closed-num" class="hidden">30</span> Issues
+              </h3>
               <p class="text-sm">Track and manage your project issues</p>
             </div>
           </div>
 
           <div class="gap-5 md:flex">
-            <p class="flex capitalize text-sm items-center"><i class="fa-solid fa-circle text-[10px] mr-1 text-[#00A96E]"></i>open</p>
-            <p class="capitalize text-sm flex items-center"><i class="fa-solid fa-circle text-[10px] mr-1 text-[#A855F7]"></i>closed</p>
+            <p class="flex capitalize text-sm items-center">
+              <i class="fa-solid fa-circle text-[10px] mr-1 text-[#00A96E]"></i
+              >open
+            </p>
+            <p class="capitalize text-sm flex items-center">
+              <i class="fa-solid fa-circle text-[10px] mr-1 text-[#A855F7]"></i
+              >closed
+            </p>
           </div>
         </div>
 
         <div id="open-container" class="hidden">
-          <div id="open-card-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
-          </div>
+          <div
+            id="open-card-list"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5"
+          ></div>
         </div>
 
         <div id="closed-container" class="hidden">
-          <div id="closed-card-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
-          </div>
+          <div
+            id="closed-card-list"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5"
+          ></div>
         </div>
 
         <div id="all-container">
-          <div id="card-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
-          </div>
+          <div
+            id="card-list"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5"
+          ></div>
         </div>
-
       </section>
     </main>
 
-    <footer id="footer">
-    </footer>
+    <footer id="footer"></footer>
 
     <script src="./scripts/main.js"></script>
     <script src="./scripts/login.js"></script>
