@@ -19,6 +19,7 @@ const closedTab = document.getElementById('closed-tab');
 const allCardNum = document.getElementById('card-all-num');
 const openCardNum = document.getElementById('card-open-num');
 const closedCardNum = document.getElementById('card-closed-num');
+const issuesModal = document.getElementById('issues-modal-1');
 
 const loadAllIssues = (data) => {
     cardList.innerHTML = '';

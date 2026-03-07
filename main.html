@@ -31,8 +31,10 @@
   </head>
   <body class="bg-gray-100">
     <header id="header">
-      <nav>
-        <div class="navbar bg-base-100 shadow-sm flex-col md:flex-row space-y-5 md:space-y-0">
+      <nav class="mt-5 md:mt-0">
+        <div
+          class="navbar bg-base-100 shadow-sm flex-col md:flex-row space-y-5 md:space-y-0 px-4 md:px-10"
+        >
           <div class="flex-1">
             <div class="flex items-center gap-2">
               <img
@@ -44,13 +46,27 @@
             </div>
           </div>
           <div class="gap-2 flex">
-            <input
-              type="text"
-              placeholder="Search issues..."
-              class="input input-bordered w-50"
-            />
-            <div class="dropdown dropdown-end">
-              <button class="btn capitalize btn-primary">+ new issue</button>
+            <label class="input w-[65%]">
+              <svg
+                class="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input type="search" required placeholder="Search" class="grow"/>
+            </label>
+            <div class="dropdown dropdown-end w-[35%]">
+              <button type="button" class="btn capitalize btn-primary"><i class="fa-solid fa-plus"></i> new issue</button>
             </div>
           </div>
         </div>
@@ -133,7 +149,8 @@
       </section>
     </main>
 
-    <footer id="footer"></footer>
+    <footer id="footer">
+    </footer>
 
     <script src="./scripts/main.js"></script>
     <script src="./scripts/login.js"></script>
