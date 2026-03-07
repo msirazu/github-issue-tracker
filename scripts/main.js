@@ -45,9 +45,12 @@ const loadAllIssues = (data) => {
             </div>
             <hr class='border-gray-200'>
             <p class="text-sm">#1 by ${item.author}</p>
-            <p class="text-sm">${item.createdAt}</p>
+            <p class="text-sm">${item.createdAt.slice(0, 10)}</p>
         `
         cardList.appendChild(div);
+        div.addEventListener('click', () => {
+            showModal(item.id);
+        });
     })
     allCardNum.innerText = Object.keys(data).length;
 }
@@ -77,9 +80,12 @@ const loadOpenIssues = (data) => {
             </div>
             <hr class='border-gray-200'>
             <p class="text-sm">#1 by ${item.author}</p>
-            <p class="text-sm">${item.createdAt}</p>
+            <p class="text-sm">${item.createdAt.slice(0, 10)}</p>
         `
         openCardList.appendChild(div);
+        div.addEventListener('click', () => {
+            showModal(item.id);
+        });
     })
     openCardNum.innerText = Object.keys(openIssues).length;
 }
@@ -109,9 +115,12 @@ const loadClosedIssues = (data) => {
             </div>
             <hr class='border-gray-200'>
             <p class="text-sm">#1 by ${item.author}</p>
-            <p class="text-sm">${item.createdAt}</p>
+            <p class="text-sm">${item.createdAt.slice(0, 10)}</p>
         `
         closedCardList.appendChild(div);
+        div.addEventListener('click', () => {
+            showModal(item.id);
+        });
     })
     closedCardNum.innerText = Object.keys(closedIssues).length;
 }
@@ -165,4 +174,44 @@ const tabSelect = (status) => {
     } else {
         showContainer('closed');
     }
+}
+
+const showModal = async(id) => {
+    issuesModal.innerHTML = '';
+    issuesModal.showModal();
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`).then(res => res.json());
+    const resData = res.data;
+    const div = document.createElement('div');
+    div.innerHTML = `
+    <div class="modal-box space-y-5">
+    <h3 class="text-xl font-bold">${resData.title}</h3>
+    <div class="flex gap-5 items-center">
+      <p class="bg-green-500 py-1 px-5 rounded-full text-white capitalize text-sm">opened</p>
+      <p class="text-[#64748B] text-sm capitalize">opened by ${resData.author}</p>
+      <p class="text-[#64748B] text-sm">${resData.createdAt.slice(0, 10)}</p>
+    </div>
+    <div class="flex gap-5">
+    ${resData.labels.map(label => 
+    `<p class="capitalize py-1 px-7 bg-[#FDE68A] rounded-full text-[12px]">${label}</p>`
+    ).join('')}
+    </div>
+    <p>${resData.description}</p>
+    <div class="flex">
+      <div class="w-[50%]">
+        <p class="capitalize font-bold">assignee:</p>
+        <p class="capitalize">${resData.assignee}</p>
+      </div>
+      <div class="w-[50%]">
+        <p class="capitalize font-bold">priotrity:</p>
+        <p class="capitalize py-1 px-7 bg-[#EF4444] rounded-full text-[12px] text-white w-20">${resData.priority}</p>
+      </div>
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn btn-primary">Close</button>
+      </form>
+    </div>
+  </div>
+    `
+    issuesModal.appendChild(div);
 }
