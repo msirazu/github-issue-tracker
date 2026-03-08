@@ -1,40 +1,48 @@
-const loadingSection = document.getElementById('loading-section');
+const showLoading = () => {
+    const loadingSection = document.getElementById('loading-section');
+    loadingSection.classList.remove('hidden');
+    loadingSection.classList.add('flex');
+}
+
+const hideLoading = () => {
+    const loadingSection = document.getElementById('loading-section');
+    loadingSection.classList.add('hidden');
+}
 
 const fetchAllData = async() => {
-    loadingSection.classList.remove('hidden');
-    loadingSection.classList.add('flex');
+    showLoading();
     const allIssuesPromise = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const allIssuesData = await allIssuesPromise.json();
-    loadingSection.classList.add('hidden');
+    hideLoading();
     loadAllIssues(allIssuesData.data);
-
-    document.getElementById('new-issue-btn').addEventListener('click', async() => {
-    const searchText = searchInput.value;
-    const searchValue = searchText.trim().toLowerCase();
-    loadingSection.classList.remove('hidden');
-    loadingSection.classList.add('flex');
-    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
-    loadingSection.classList.add('hidden');
-    loadSearchIssues(res.data);
-    });
 }
 fetchAllData();
 
+const fetchSearchData = () => {
+    document.getElementById('new-issue-btn').addEventListener('click', async() => {
+    const searchText = searchInput.value;
+    const searchValue = searchText.trim().toLowerCase();
+    showLoading();
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
+    hideLoading();
+    loadSearchIssues(res.data);
+    });
+}
+fetchSearchData();
+
 const fetchOpenData = async() => {
-    loadingSection.classList.remove('hidden');
-    loadingSection.classList.add('flex');
+    showLoading();
     const allIssuesPromise = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const allIssuesData = await allIssuesPromise.json();
-    loadingSection.classList.add('hidden');
+    hideLoading();
     loadOpenIssues(allIssuesData.data);
 }
 
 const fetchClosedData = async() => {
-    loadingSection.classList.remove('hidden');
-    loadingSection.classList.add('flex');
+    showLoading();
     const allIssuesPromise = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const allIssuesData = await allIssuesPromise.json();
-    loadingSection.classList.add('hidden');
+    hideLoading();
     loadClosedIssues(allIssuesData.data);
 }
 
@@ -265,6 +273,7 @@ const tabSelect = (status) => {
         fetchClosedData();
     } else {
         showContainer('search');
+        fetchSearchData();
     }
 }
 
