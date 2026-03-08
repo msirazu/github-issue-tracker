@@ -1,12 +1,16 @@
 const showLoading = () => {
     const loadingSection = document.getElementById('loading-section');
-    loadingSection.classList.remove('hidden');
-    loadingSection.classList.add('flex');
+    if (loadingSection) {
+        loadingSection.classList.remove('hidden');
+        loadingSection.classList.add('flex');
+    }
 }
 
 const hideLoading = () => {
     const loadingSection = document.getElementById('loading-section');
-    loadingSection.classList.add('hidden');
+    if (loadingSection) {
+        loadingSection.classList.add('hidden');
+    }
 }
 
 const fetchAllData = async() => {
@@ -55,6 +59,9 @@ const newIssueBtn = document.getElementById('new-issue-btn');
 const searchInput = document.getElementById('search-input');
 
 const loadAllIssues = (data) => {
+    if (!cardList) {
+        return;
+    }
     cardList.innerHTML = '';
     data.forEach(item => {
         const div = document.createElement('div');
@@ -158,14 +165,16 @@ const loadClosedIssues = (data) => {
     closedCardNum.innerText = Object.keys(closedIssues).length;
 }
 
-newIssueBtn.addEventListener('click', async() => {
-    const searchText = searchInput.value;
-    const searchValue = searchText.trim().toLowerCase();
-    showLoading();
-    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
-    hideLoading();
-    loadSearchIssues(res.data);
-    });
+if (newIssueBtn) {
+    newIssueBtn.addEventListener('click', async() => {
+        const searchText = searchInput.value;
+        const searchValue = searchText.trim().toLowerCase();
+        showLoading();
+        const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
+        hideLoading();
+        loadSearchIssues(res.data);
+        });
+}
 
 const loadSearchIssues = (data) => {
     searchCardList.innerHTML = '';
