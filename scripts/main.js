@@ -18,18 +18,6 @@ const fetchAllData = async() => {
 }
 fetchAllData();
 
-const fetchSearchData = () => {
-    document.getElementById('new-issue-btn').addEventListener('click', async() => {
-    const searchText = searchInput.value;
-    const searchValue = searchText.trim().toLowerCase();
-    showLoading();
-    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
-    hideLoading();
-    loadSearchIssues(res.data);
-    });
-}
-fetchSearchData();
-
 const fetchOpenData = async() => {
     showLoading();
     const allIssuesPromise = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
@@ -170,6 +158,15 @@ const loadClosedIssues = (data) => {
     closedCardNum.innerText = Object.keys(closedIssues).length;
 }
 
+newIssueBtn.addEventListener('click', async() => {
+    const searchText = searchInput.value;
+    const searchValue = searchText.trim().toLowerCase();
+    showLoading();
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
+    hideLoading();
+    loadSearchIssues(res.data);
+    });
+
 const loadSearchIssues = (data) => {
     searchCardList.innerHTML = '';
     data.forEach(item => {
@@ -273,7 +270,6 @@ const tabSelect = (status) => {
         fetchClosedData();
     } else {
         showContainer('search');
-        fetchSearchData();
     }
 }
 
