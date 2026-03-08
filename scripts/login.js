@@ -8,23 +8,19 @@ form.addEventListener('submit', (e) => {
     const password = e.target.password.value;
 
     if (userName !== 'admin') {
-        errorMsg.innerText = '';
         errorMsg.innerText = 'username incorrect';
         return;
     }
 
     if (password !== 'admin123') {
-        errorMsg.innerText = '';
         errorMsg.innerText = 'password incorrect';
         return;
     }
 
+    errorMsg.innerText = '';
     successMsg.innerText = '';
     successMsg.innerText = 'login success';
-    window.open('main.html', '_self');
+    window.location.href = 'main.html';
 
-    e.target.name.value = '';
-    e.target.password.value = '';
+    e.target.reset();
 })
-
-

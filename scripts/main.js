@@ -215,3 +215,7 @@ const showModal = async(id) => {
     `
     issuesModal.appendChild(div);
 }
+
+const logOut = () => {
+    window.location.href = 'index.html';
+}

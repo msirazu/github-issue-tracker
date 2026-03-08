@@ -74,8 +74,8 @@
     </header>
 
     <main id="main" class="w-11/12 mx-auto my-5 md:w-10/12">
-      <section id="tab-section" class="bg-white p-5">
-        <div id="tab-container" class="flex gap-3">
+      <section id="tab-section" class="bg-white p-3 flex justify-between gap-2 items-center md:p-5">
+        <div id="tab-container" class="flex gap-2 md:gap-3">
           <button
             onclick="tabSelect('all')"
             id="all-tab"
@@ -97,6 +97,9 @@
           >
             closed
           </button>
+        </div>
+        <div>
+          <button onclick="logOut()" id="log-out" class="btn btn-info capitalize text-white">log out</button>
         </div>
       </section>
 
