@@ -1,18 +1,42 @@
-const fetchData = async() => {
+const loadingSection = document.getElementById('loading-section');
+
+const fetchAllData = async() => {
+    loadingSection.classList.remove('hidden');
+    loadingSection.classList.add('flex');
     const allIssuesPromise = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const allIssuesData = await allIssuesPromise.json();
+    loadingSection.classList.add('hidden');
     loadAllIssues(allIssuesData.data);
-    loadOpenIssues(allIssuesData.data);
-    loadClosedIssues(allIssuesData.data);
 
     document.getElementById('new-issue-btn').addEventListener('click', async() => {
     const searchText = searchInput.value;
     const searchValue = searchText.trim().toLowerCase();
+    loadingSection.classList.remove('hidden');
+    loadingSection.classList.add('flex');
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
+    loadingSection.classList.add('hidden');
     loadSearchIssues(res.data);
     });
 }
-fetchData();
+fetchAllData();
+
+const fetchOpenData = async() => {
+    loadingSection.classList.remove('hidden');
+    loadingSection.classList.add('flex');
+    const allIssuesPromise = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+    const allIssuesData = await allIssuesPromise.json();
+    loadingSection.classList.add('hidden');
+    loadOpenIssues(allIssuesData.data);
+}
+
+const fetchClosedData = async() => {
+    loadingSection.classList.remove('hidden');
+    loadingSection.classList.add('flex');
+    const allIssuesPromise = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+    const allIssuesData = await allIssuesPromise.json();
+    loadingSection.classList.add('hidden');
+    loadClosedIssues(allIssuesData.data);
+}
 
 const cardList = document.getElementById('card-list');
 const allContainer = document.getElementById('all-container');
@@ -231,12 +255,14 @@ const showContainer = (tab) => {
 
 const tabSelect = (status) => {
     if (status === 'all') {
-        fetchData();
+        fetchAllData();
         showContainer('all');
     } else if (status === 'open') {
         showContainer('open');
+        fetchOpenData();
     } else if (status === 'closed') {
         showContainer('closed');
+        fetchClosedData();
     } else {
         showContainer('search');
     }
