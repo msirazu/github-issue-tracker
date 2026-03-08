@@ -4,12 +4,21 @@ const fetchData = async() => {
     loadAllIssues(allIssuesData.data);
     loadOpenIssues(allIssuesData.data);
     loadClosedIssues(allIssuesData.data);
+
+    document.getElementById('new-issue-btn').addEventListener('click', async() => {
+    const searchText = searchInput.value;
+    const searchValue = searchText.trim().toLowerCase();
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`).then(res => res.json());
+    loadSearchIssues(res.data);
+    });
 }
 fetchData();
 
 const cardList = document.getElementById('card-list');
 const allContainer = document.getElementById('all-container');
 const openContainer = document.getElementById('open-container');
+const searchContainer = document.getElementById('search-container');
+const searchCardList = document.getElementById('search-card-list');
 const openCardList = document.getElementById('open-card-list');
 const closedCardList = document.getElementById('closed-card-list');
 const closedContainer = document.getElementById('closed-container');
@@ -19,7 +28,11 @@ const closedTab = document.getElementById('closed-tab');
 const allCardNum = document.getElementById('card-all-num');
 const openCardNum = document.getElementById('card-open-num');
 const closedCardNum = document.getElementById('card-closed-num');
+const searchCardNum = document.getElementById('card-search-num');
 const issuesModal = document.getElementById('issues-modal-1');
+const logOutBtn = document.getElementById('log-out-btn');
+const newIssueBtn = document.getElementById('new-issue-btn');
+const searchInput = document.getElementById('search-input');
 
 const loadAllIssues = (data) => {
     cardList.innerHTML = '';
@@ -125,11 +138,46 @@ const loadClosedIssues = (data) => {
     closedCardNum.innerText = Object.keys(closedIssues).length;
 }
 
+const loadSearchIssues = (data) => {
+    searchCardList.innerHTML = '';
+    data.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('card-all', 'space-y-2', 'bg-gray-100', 'p-5', 'rounded-lg');
+        if (item.status === 'open') {
+            div.classList.add('border-t-3', 'border-green-500');
+        } else {
+            div.classList.add('border-t-3', 'border-purple-500');
+        }
+        div.innerHTML = `
+            <div class="flex justify-between items-center">
+              ${item.priority === 'low' ? '<i class="fa-solid fa-circle text-purple-500"></i>' : '<i class="fa-regular fa-circle text-green-500"></i>'}
+              <p class="capitalize py-1 px-5 bg-red-100 rounded-full text-[12px]">${item.priority}</p>
+            </div>
+            <h2 class="font-bold text-lg">${item.title}</h2>
+            <p class="text-sm">${item.description}</p>
+            <div class="flex justify-between">
+              ${item.labels.map(label => `
+                <p class="capitalize py-1 px-7 bg-red-100 rounded-full text-[12px]">${label}</p>
+                `).join('')}
+            </div>
+            <hr class='border-gray-200'>
+            <p class="text-sm">#1 by ${item.author}</p>
+            <p class="text-sm">${item.createdAt.slice(0, 10)}</p>
+        `
+        searchCardList.appendChild(div);
+        div.addEventListener('click', () => {
+            showModal(item.id);
+        });
+    });
+    searchCardNum.innerText = Object.keys(data).length;
+}
+
 const showContainer = (tab) => {
     if (tab === 'all') {
         allContainer.classList.remove('hidden');
         openContainer.classList.add('hidden');
         closedContainer.classList.add('hidden');
+        searchContainer.classList.add('hidden');
 
         allTab.classList.add('btn-primary');
         openTab.classList.remove('btn-primary');
@@ -138,10 +186,12 @@ const showContainer = (tab) => {
         allCardNum.classList.remove('hidden');
         openCardNum.classList.add('hidden');
         closedCardNum.classList.add('hidden');
+        searchCardNum.classList.add('hidden');
     } else if (tab === 'open') {
         openContainer.classList.remove('hidden');
         allContainer.classList.add('hidden');
         closedContainer.classList.add('hidden');
+        searchContainer.classList.add('hidden');
 
         openTab.classList.add('btn-primary');
         allTab.classList.remove('btn-primary');
@@ -150,10 +200,12 @@ const showContainer = (tab) => {
         openCardNum.classList.remove('hidden');
         allCardNum.classList.add('hidden');
         closedCardNum.classList.add('hidden');
-    } else {
+        searchCardNum.classList.add('hidden');
+    } else if (tab === 'closed') {
         closedContainer.classList.remove('hidden');
         openContainer.classList.add('hidden');
         allContainer.classList.add('hidden');
+        searchContainer.classList.add('hidden');
 
         closedTab.classList.add('btn-primary');
         openTab.classList.remove('btn-primary');
@@ -162,7 +214,19 @@ const showContainer = (tab) => {
         closedCardNum.classList.remove('hidden');
         allCardNum.classList.add('hidden');
         openCardNum.classList.add('hidden');
+        searchCardNum.classList.add('hidden');
+    } else {
+        searchContainer.classList.remove('hidden');
+        openContainer.classList.add('hidden');
+        allContainer.classList.add('hidden');
+        closedContainer.classList.add('hidden');
+
+        searchCardNum.classList.remove('hidden');
+        closedCardNum.classList.add('hidden');
+        allCardNum.classList.add('hidden');
+        openCardNum.classList.add('hidden');
     }
+    
 }
 
 const tabSelect = (status) => {
@@ -171,8 +235,10 @@ const tabSelect = (status) => {
         showContainer('all');
     } else if (status === 'open') {
         showContainer('open');
-    } else {
+    } else if (status === 'closed') {
         showContainer('closed');
+    } else {
+        showContainer('search');
     }
 }
 
