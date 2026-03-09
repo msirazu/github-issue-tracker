@@ -36,7 +36,7 @@
           class="navbar bg-base-100 shadow-sm flex-col md:flex-row space-y-5 md:space-y-0 px-4 md:px-10"
         >
           <div class="flex-1">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 justify-center md:justify-start">
               <img
                 src="./assets/images/github-logo.png"
                 alt=""
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="gap-2 flex">
-            <label class="input w-[60%]">
+            <label class="input flex-grow">
               <svg
                 class="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,8 +65,8 @@
               </svg>
               <input id="search-input" type="search" required placeholder="Search issues....." name="search" class="grow"/>
             </label>
-            <div class="dropdown dropdown-end w-[40%]">
-              <button onclick="tabSelect('search')" id="new-issue-btn" type="button" class="btn capitalize btn-primary">search</button>
+            <div class="dropdown dropdown-end flex-grow">
+              <button onclick="tabSelect('search')" id="new-issue-btn" type="button" class="btn capitalize btn-primary whitespace-nowrap">search</button>
             </div>
           </div>
         </div>
@@ -74,8 +74,8 @@
     </header>
 
     <main id="main" class="w-11/12 mx-auto mt-5 md:w-10/12 pb-5">
-      <section id="tab-section" class="bg-white p-3 flex justify-between gap-2 items-center md:p-5">
-        <div id="tab-container" class="flex gap-2 md:gap-3">
+      <section id="tab-section" class="bg-white p-3 flex justify-between gap-1 items-center md:p-5">
+        <div id="tab-container" class="flex gap-1 md:gap-3">
           <button
             onclick="tabSelect('all')"
             id="all-tab"
@@ -99,7 +99,7 @@
           </button>
         </div>
         <div>
-          <button onclick="logOut()" id="log-out-btn" class="btn btn-info capitalize text-white">log out</button>
+          <button onclick="logOut()" id="log-out-btn" class="btn btn-info whitespace-nowrap capitalize text-white">log out</button>
         </div>
       </section>
 
